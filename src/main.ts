@@ -3,6 +3,8 @@ import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.ts'
 
+import rive from "@rive-app/canvas";
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -22,3 +24,20 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+
+const canvas = document.getElementById("canvas") as HTMLCanvasElement|null; 
+if(canvas !== null){
+  const r = new rive.Rive({
+    src: "https://cdn.rive.app/animations/vehicles.riv",
+    // Or the path to a public Rive asset
+    // src: '/public/example.riv',
+    canvas: canvas,
+    autoplay: true,
+    stateMachines: "bumpy",
+    onLoad: () => {
+      r.resizeDrawingSurfaceToCanvas();
+    },
+  });
+}else{
+  console.error('canvas element not found');
+}
