@@ -1,5 +1,5 @@
 import "./style.css";
-import { Rive, Layout, Fit } from "@rive-app/canvas";
+import rive from "@rive-app/canvas";
 
 // import file directly from within src/ folder
 import vehicleRive from "./assets/vehicles.riv";
@@ -20,11 +20,11 @@ function loadRiveElement(source: any, canvasId: string) {
   }
 
   // https://help.rive.app/runtimes/layout
-  let layout = new Layout({
-    fit: Fit.Cover,
+  let layout = new rive.Layout({
+    fit: rive.Fit.Cover,
   });
 
-  const riveEl = new Rive({
+  const riveEl = new rive.Rive({
     src: source,
     canvas: canvas,
     layout: layout,
