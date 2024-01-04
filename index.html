@@ -7,9 +7,18 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <h2>Rive local (import from "src/"-folder)</h2>
+        <canvas id="canvas1" width="500" height="500"></canvas>
 
-    <canvas id="canvas" width="500" height="500"></canvas>
+        <h2>Rive local (path via "/")</h2>
+        <canvas id="canvas2" width="500" height="500"></canvas>
+
+        <h2>Rive CDN</h2>
+        <canvas id="canvas3" width="500" height="500"></canvas>
+      </div>
+    </div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

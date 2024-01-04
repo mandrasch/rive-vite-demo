@@ -1,43 +1,35 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import "./style.css";
+import typescriptLogo from "./assets/typescript.svg";
+import viteLogo from "/vite.svg";
+import { setupCounter } from "./counter.ts";
 
-import rive from "@rive-app/canvas";
+import { Rive } from "@rive-app/canvas";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// import file directly from within src/ folder
+import vehicleRive from "./assets/vehicles.riv";
+loadRiveElement(vehicleRive, "canvas1");
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+// path (via public/)
+loadRiveElement("/vehicles-public.riv", "canvas2");
 
-const canvas = document.getElementById("canvas") as HTMLCanvasElement|null; 
-if(canvas !== null){
-  const r = new rive.Rive({
-    src: "https://cdn.rive.app/animations/vehicles.riv",
-    // Or the path to a public Rive asset
-    // src: '/public/example.riv',
+// CDN
+loadRiveElement("https://cdn.rive.app/animations/vehicles.riv", "canvas3");
+
+function loadRiveElement(source: any, canvasId: string) {
+  const canvas = document.getElementById(canvasId) as HTMLCanvasElement | null;
+
+  if (canvas === null) {
+    console.error(`canvas element with id ${canvasId} not found`);
+    return;
+  }
+
+  const rive = new Rive({
+    src: source,
     canvas: canvas,
     autoplay: true,
     stateMachines: "bumpy",
     onLoad: () => {
-      r.resizeDrawingSurfaceToCanvas();
+      rive.resizeDrawingSurfaceToCanvas();
     },
   });
-}else{
-  console.error('canvas element not found');
 }
