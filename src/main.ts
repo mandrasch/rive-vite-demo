@@ -1,8 +1,4 @@
 import "./style.css";
-import typescriptLogo from "./assets/typescript.svg";
-import viteLogo from "/vite.svg";
-import { setupCounter } from "./counter.ts";
-
 import { Rive } from "@rive-app/canvas";
 
 // import file directly from within src/ folder
